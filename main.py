@@ -21,16 +21,12 @@ class GetInfo:
 
             self.dateInfo = f"{resultDay.text} {resultMonth.text}"
             self.temperatureInfo = resultTemperature.text
-            #return dateInfo
 
 con = sqlite3.connect("hw_10_db.sl3")
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS weather (date TEXT, temperature TEXT)")
 cur.execute("DELETE FROM weather")
 for i in range(7):
-    # getInfo(i+1)
-    # dateInfo = getInfo(i+1)
-    # temperatureInfo = i+1
     info = GetInfo()
     info.getInfo(i+1)
     cur.execute("INSERT INTO weather (date, temperature) values (?, ?)",(info.dateInfo, info.temperatureInfo))
